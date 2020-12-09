@@ -9,7 +9,7 @@ require 'tty-spinner'
 require 'tty-link'
 require 'byebug'
 
-class User_interface
+class Scraper_variables
 
   def initialize
     @url = 'https://www.worldometers.info/coronavirus/'
@@ -18,26 +18,26 @@ class User_interface
     @countries_and_territories = @doc.css('tr').reject { |tr| tr['data-continent'] }[2..221]
     @countries_stats = []
 
-    @general_info = doc.css('#maincounter-wrap').map do |e|
+    @general_info = @doc.css('#maincounter-wrap').map do |e|
     e.text
      .gsub(/\n/, '')
      .split(':')
     end
 
     @active_cases = {
-    currently_infected_patients: doc.css('.number-table-main')[0].text,
-    in_mild_condition: doc.css('span.number-table')[0].text,
-    mild_percentage: doc.css('div.panel.panel-default strong')[0].text + '%',
-    serious_or_critical: doc.css('span.number-table')[1].text,
-    serious_or_critical_percent: doc.css('div.panel.panel-default strong')[1].text + '%',
+    currently_infected_patients: @doc.css('.number-table-main')[0].text,
+    in_mild_condition: @doc.css('span.number-table')[0].text,
+    mild_percentage: @doc.css('div.panel.panel-default strong')[0].text + '%',
+    serious_or_critical: @doc.css('span.number-table')[1].text,
+    serious_or_critical_percent: @doc.css('div.panel.panel-default strong')[1].text + '%',
     }
 
     @closed_cases = {
-    cases_wich_had_an_outcome: doc.css('.number-table-main')[1].text,
-    recovered_discharged: doc.css('span.number-table')[2].text,
-    reco_dis_percentage: doc.css('div.panel.panel-default strong')[2].text + '%',
-    deaths: doc.css('span.number-table')[3].text.gsub(/\n/, ''),
-    death_percent: doc.css('div.panel.panel-default strong')[3].text + '%',
+    cases_wich_had_an_outcome: @doc.css('.number-table-main')[1].text,
+    recovered_discharged: @doc.css('span.number-table')[2].text,
+    reco_dis_percentage: @doc.css('div.panel.panel-default strong')[2].text + '%',
+    deaths: @doc.css('span.number-table')[3].text.gsub(/\n/, ''),
+    death_percent: @doc.css('div.panel.panel-default strong')[3].text + '%',
     }
 
     @countries_and_territories.each  do |country_and_t|
@@ -58,11 +58,86 @@ class User_interface
           population: country_and_t.css('td')[14].text,
           continent: country_and_t.css('td')[15].text
           }
-          @countries_stats.push(country)
-    end
+        @countries_stats.push(country)
+    end 
   end
 
+  def print_general_table
+    puts ""
+    puts "General information about covid-19 worldwide:"
+    puts Terminal::Table.new(
+    rows: [
+      [@general_info[0][1], @general_info[1][1], @general_info[2][1]]
+    ],
+    headings: [
+      @general_info[0][0].bold.blue,
+      @general_info[1][0].bold.light_white,
+      @general_info[2][0].bold.green
+    ],
+    style: {
+      border_i: '+'
+    }
+    )
+    puts ""
+ end
+
+ def print_country(country)
+    $spinner.auto_spin
+    puts Terminal::Table.new(
+      rows: [
+        [country[:name], 
+        country[:total_cases], 
+        country[:new_cases],
+        country[:total_deaths],
+        country[:new_deaths],
+        country[:total_recovered],
+        country[:new_recovered],
+        country[:active_cases],
+        country[:serious_critical],
+        country[:total_cases_per_1_milion]]
+      ],
+      headings: [
+        'Country'.bold.blue,
+        'Total'.red,
+        'New cases'.bold.blue,
+        'Total deaths'.bold.red,
+        'New deaths'.red,
+        'Total reco'.bold.green,
+        'New reco'.bold.green,
+        'Active cases'.red,
+        'Serious/critical'  .red,
+        'Total cases/1M'.bold.blue,
+        
+      ],
+      style: {
+        border_i: '+'
+      }
+     )
+  
+     puts Terminal::Table.new(
+       rows: [
+        [country[:deaths_per_1_milion],
+        country[:total_tests],
+        country[:tests_per_1_milion],
+        country[:population],
+        country[:continent] ]
+       ],
+       headings: [
+        'Total deaths/1M'.red,
+        'Total tests'.bold.blue,
+        'Total tests/1M'.bold.blue,
+        'Population'.bold.green,
+        'continent'.bold.green
+       ],
+       style: {
+        border_i: '+'
+      }
+     )
+     $spinner.success
+      puts ""
+    end
 end
 
-user = User_interface.new
-user.scraper
+user = Scraper_variables.new
+
+user.print_general_table
