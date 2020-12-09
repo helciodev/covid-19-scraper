@@ -18,6 +18,28 @@ class User_interface
     @countries_and_territories = @doc.css('tr').reject { |tr| tr['data-continent'] }[2..221]
     @countries_stats = []
 
+    @general_info = doc.css('#maincounter-wrap').map do |e|
+    e.text
+     .gsub(/\n/, '')
+     .split(':')
+    end
+
+    @active_cases = {
+    currently_infected_patients: doc.css('.number-table-main')[0].text,
+    in_mild_condition: doc.css('span.number-table')[0].text,
+    mild_percentage: doc.css('div.panel.panel-default strong')[0].text + '%',
+    serious_or_critical: doc.css('span.number-table')[1].text,
+    serious_or_critical_percent: doc.css('div.panel.panel-default strong')[1].text + '%',
+    }
+
+    @closed_cases = {
+    cases_wich_had_an_outcome: doc.css('.number-table-main')[1].text,
+    recovered_discharged: doc.css('span.number-table')[2].text,
+    reco_dis_percentage: doc.css('div.panel.panel-default strong')[2].text + '%',
+    deaths: doc.css('span.number-table')[3].text.gsub(/\n/, ''),
+    death_percent: doc.css('div.panel.panel-default strong')[3].text + '%',
+    }
+
     @countries_and_territories.each  do |country_and_t|
         country = {
           name: country_and_t.css('td')[1].text, 
