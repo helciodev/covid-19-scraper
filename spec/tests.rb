@@ -35,3 +35,46 @@ describe User_interface do
   end
 end
 
+describe Scraper do
+  let(:scraper) {Scraper.new}
+  let(:scraper_1) {Scraper.new}
+  let countries = [
+    {
+      :name=>"USA", 
+      :total_cases=>"15,824,444", 
+      :new_cases=>"+3,081", 
+      :total_deaths=>"296,777 ", 
+      :new_deaths=>"+62", 
+      :total_recovered=>"9,233,622", 
+      :new_recovered=>"+6,206", 
+      :active_cases=>"6,294,045", 
+      :serious_critical=>"27,329", 
+      :total_cases_per_1_milion=>"47,684", 
+      :deaths_per_1_milion=>"894", 
+      :total_tests=>"213,118,147", 
+      :tests_per_1_milion=>"642,193", 
+      :population=>"331,859,797 ", 
+      :continent=>"North America"
+    },
+    {
+      :name=>"China", 
+      :total_cases=>"86,673", 
+      :new_cases=>"+12", 
+      :total_deaths=>"4,634 ", 
+      :new_deaths=>"", 
+      :total_recovered=>"81,754", 
+      :new_recovered=>"+11", 
+      :active_cases=>"285", 
+      :serious_critical=>"5", 
+      :total_cases_per_1_milion=>"60", 
+      :deaths_per_1_milion=>"3", 
+      :total_tests=>"160,000,000", 
+      :tests_per_1_milion=>"111,163", 
+      :population=>"1,439,323,776 ", 
+      :continent=>"Asia"
+    }
+  ]
+  describe '<< User_interface class >>'.magenta do
+  end
+end
+

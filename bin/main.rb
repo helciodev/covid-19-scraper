@@ -7,6 +7,7 @@ require 'tty-prompt'
 require 'tty-box'
 require 'tty-spinner'
 require 'tty-link'
+require 'byebug'
 
 
 require_relative '../lib/scraper_logic'
@@ -130,7 +131,6 @@ def print_active_cases
     )
     puts ""
   end
-
     # print general table method
    def start_scraper
     @spinner.auto_spin
@@ -140,10 +140,12 @@ def print_active_cases
     print_general_table
     print_active_cases
     print_closed_cases
+    byebug
     scraper_logic.ask_user(@countries_stats)
    end
 
 end
 
 scrape = User_interface.new
+scrape.start_scraper
 
