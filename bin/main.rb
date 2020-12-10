@@ -14,7 +14,7 @@ class UserInterface
 
   def initialize
     self.scraper_logic = Scraper.new
-    @doc = Nokogiri::HTML(URI.parse('https://www.worldometers.info/coronavirus/'))
+    @doc = Nokogiri::HTML(URI.open('https://www.worldometers.info/coronavirus/'))
     @countries_and_territories = @doc.css('tr').reject { |tr| tr['data-continent'] }[2..221]
     @countries_stats = []
     @general_info = @doc.css('#maincounter-wrap').map do |e|
@@ -135,9 +135,8 @@ class UserInterface
 
   # print general table method
   def start_scraper
-    @spinner.auto_spin
-    print TTY::Link.link_to('fetching data from', 'https://www.worldometers.info/coronavirus/')
-    @spinner.success
+    puts ""
+    puts TTY::Link.link_to( 'data from', 'https://www.worldometers.info/coronavirus/'.blue)
     welcome_message
     print_general_table
     print_active_cases
@@ -146,5 +145,5 @@ class UserInterface
   end
 end
 
-scraper = User_interface.new
+scraper = UserInterface.new
 scraper.start_scraper
