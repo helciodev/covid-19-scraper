@@ -9,7 +9,7 @@ require 'tty-spinner'
 require 'tty-link'
 require 'byebug'
 
-class Scraper_variables
+class User_interface
 
   def initialize
     @url = 'https://www.worldometers.info/coronavirus/'
@@ -81,6 +81,26 @@ class Scraper_variables
     puts ""
  end
 
+#  print active cases
+def print_active_cases
+  p 'Active cases:'.upcase
+  puts Terminal::Table.new(
+    rows: [
+      [@active_cases[:currently_infected_patients],@active_cases[:in_mild_condition] , @active_cases[:mild_percentage],@active_cases[:serious_critical],@active_cases[:serious_or_critical_percent] ] 
+    ],
+    headings: [
+      'Currently infected patients',
+      'In mild conditions'.blue,
+      'In mild conditions %'.blue,
+      'Serious/critical'.red,
+      'Serious/Critical %'.red
+    ],
+    style: {
+      border_i: '+'
+    }
+  )
+  end
+#  print country function
  def print_country(country)
     $spinner.auto_spin
     puts Terminal::Table.new(
@@ -136,8 +156,11 @@ class Scraper_variables
      $spinner.success
       puts ""
     end
+
+    # print general table method
+   
 end
 
-user = Scraper_variables.new
+user = User_interface.new
 
 user.print_general_table

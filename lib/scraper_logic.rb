@@ -10,3 +10,7 @@ require 'tty-link'
 require 'byebug'
 
 require_relative '../bin/main'
+
+class Scraper
+    
+end
