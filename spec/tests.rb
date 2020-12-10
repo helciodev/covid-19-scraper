@@ -11,7 +11,7 @@ require 'tty-box'
 require 'tty-spinner'
 require 'tty-link'
 
-=begin
+
 describe User_interface do
   let (:user_interface) {User_interface.new}
   let (:user_interface_1) {User_interface.new}
@@ -34,7 +34,7 @@ describe User_interface do
     end
   end
 end
-=end
+
 
 describe Scraper do
   let(:scraper) {Scraper.new}
@@ -83,6 +83,12 @@ describe Scraper do
       end
     it 'checks if scraper.print_all equals scraper_1.print_all' do
       expect(scraper.print_all(countries)).to equal(scraper_1.print_all(countries))
+      end
+    it 'checks if scraper.filter_country equals scraper_1.filter_country' do
+      expect(scraper.filter_country(countries, name)).to equal(scraper_1.filter_country(countries, name))
+      end
+    it 'checks if scraper.ask_user equals scraper_1.ask_user' do
+      expect(scraper.ask_user(countries)).to equal(scraper_1.ask_user(countries))
       end
   end
 end
