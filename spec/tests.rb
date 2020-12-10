@@ -76,13 +76,13 @@ describe Scraper do
     }
   ]
   name = 'USA'
-  
+
   describe '<< Scraper class >>'.magenta do
     it 'checks if scraper.print_country equals scraper_1.print_country' do
       expect(scraper.print_country(countries[0])).to equal(scraper_1.print_country(countries[0]))
       end
-    it 'checks if scraper.print_country equals scraper_1.print_country' do
-      expect(scraper.print_country(countries[0])).to equal(scraper_1.print_country(countries[0]))
+    it 'checks if scraper.print_all equals scraper_1.print_all' do
+      expect(scraper.print_all(countries)).to equal(scraper_1.print_all(countries))
       end
   end
 end
