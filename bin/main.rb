@@ -141,7 +141,6 @@ def print_active_cases
     print_active_cases
     print_closed_cases
     scraper_logic.ask_user(@countries_stats)
-    
    end
 
 end
