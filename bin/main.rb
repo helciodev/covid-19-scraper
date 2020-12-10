@@ -14,6 +14,7 @@ require_relative '../lib/scraper_logic'
 class User_interface
   attr_accessor :scraper_logic
 
+
   def initialize
     @spinner = TTY::Spinner.new
     self.scraper_logic = Scraper.new
