@@ -14,8 +14,10 @@ This app scrapes for data at [world ometers info](https://www.worldometers.info/
 
 ## Usage Instructions
 ![screenshot](assets/general-info.png)
+
 <p>As soon as the user starts running the app, he/she sees the information represented in the image above</p>
 <p>The user can interact with the app by selecting a respective country from the 220 countries and territories affected by covid-19 using keyboard arrows as shown in the image below </p>
+
 ![screenshot](assets/user-interact.jpg)
 
 ## Designed With
