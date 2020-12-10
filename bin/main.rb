@@ -147,5 +147,5 @@ def print_active_cases
 end
 
 scrape = User_interface.new
-scrape.start_scraper
+# scrape.start_scraper
 

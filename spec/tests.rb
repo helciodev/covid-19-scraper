@@ -11,7 +11,7 @@ require 'tty-box'
 require 'tty-spinner'
 require 'tty-link'
 
-
+=begin
 describe User_interface do
   let (:user_interface) {User_interface.new}
   let (:user_interface_1) {User_interface.new}
@@ -34,11 +34,12 @@ describe User_interface do
     end
   end
 end
+=end
 
 describe Scraper do
   let(:scraper) {Scraper.new}
   let(:scraper_1) {Scraper.new}
-  let countries = [
+  countries = [
     {
       :name=>"USA", 
       :total_cases=>"15,824,444", 
@@ -74,7 +75,15 @@ describe Scraper do
       :continent=>"Asia"
     }
   ]
-  describe '<< User_interface class >>'.magenta do
+  name = 'USA'
+  
+  describe '<< Scraper class >>'.magenta do
+    it 'checks if scraper.print_country equals scraper_1.print_country' do
+      expect(scraper.print_country(countries[0])).to equal(scraper_1.print_country(countries[0]))
+      end
+    it 'checks if scraper.print_country equals scraper_1.print_country' do
+      expect(scraper.print_country(countries[0])).to equal(scraper_1.print_country(countries[0]))
+      end
   end
 end
 
