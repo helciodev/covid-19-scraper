@@ -100,6 +100,28 @@ def print_active_cases
     }
   )
   end
+
+  # print closed cases
+  def print_closed_cases
+    p 'Closed cases:'.upcase
+    puts Terminal::Table.new(
+      rows: [
+        [@closed_cases[:cases_wich_had_an_outcome],@closed_cases[:recovered_discharged] , @closed_cases[:reco_dis_percentage],@closed_cases[:deaths],@closed_cases[:death_percent] ] 
+      ],
+      headings: [
+        'Cases wich had an outcome',
+        'Recovered Discharged'.green,
+        'Recovered/discharged %'.green,
+        'Deaths'.red,
+        'Death %'.red
+      ],
+      style: {
+        border_i: '+'
+      }
+    )
+    puts ""
+    end
+
 #  print country function
  def print_country(country)
     $spinner.auto_spin
@@ -163,4 +185,5 @@ end
 
 user = User_interface.new
 
-user.print_general_table
+user.print_active_cases
+user.print_closed_cases
