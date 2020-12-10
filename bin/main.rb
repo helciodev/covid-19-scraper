@@ -148,5 +148,3 @@ end
 
 scrape = User_interface.new
 
-# scrape.print_active_cases
-scrape.start_scraper
