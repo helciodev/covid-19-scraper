@@ -7,7 +7,7 @@ require 'tty-prompt'
 require 'tty-box'
 require 'tty-spinner'
 require 'tty-link'
-require 'byebug'
+
 
 require_relative '../lib/scraper_logic'
 
@@ -15,10 +15,10 @@ class User_interface
   attr_accessor :scraper_logic
 
   def initialize
+    @spinner = TTY::Spinner.new
     self.scraper_logic = Scraper.new
     @url = 'https://www.worldometers.info/coronavirus/'
     @doc = Nokogiri::HTML(URI.open(@url))
-    @spinner = TTY::Spinner.new
     @countries_and_territories = @doc.css('tr').reject { |tr| tr['data-continent'] }[2..221]
     @countries_stats = []
     @general_info = @doc.css('#maincounter-wrap').map do |e|
@@ -89,7 +89,7 @@ def print_active_cases
   p 'Active cases:'.upcase
   puts Terminal::Table.new(
     rows: [
-      [@active_cases[:currently_infected_patients],@active_cases[:in_mild_condition] , @active_cases[:mild_percentage],@active_cases[:serious_critical],@active_cases[:serious_or_critical_percent] ] 
+      [@active_cases[:currently_infected_patients],@active_cases[:in_mild_condition] , @active_cases[:mild_percentage],@active_cases[:serious_or_critical],@active_cases[:serious_or_critical_percent] ] 
     ],
     headings: [
       'Currently infected patients',
@@ -102,6 +102,11 @@ def print_active_cases
       border_i: '+'
     }
   )
+  end
+
+  def welcome_message
+    box = TTY::Box.info("welcome to covid-19 scraper")
+    print box
   end
 
   # print closed cases
@@ -130,12 +135,17 @@ def print_active_cases
     @spinner.auto_spin
     print TTY::Link.link_to("fetching data from", "https://www.worldometers.info/coronavirus/")
     @spinner.success
+    welcome_message
+    print_general_table
+    print_active_cases
+    print_closed_cases
     scraper_logic.ask_user(@countries_stats)
+    
    end
 
 end
 
 scrape = User_interface.new
 
-scrape.print_active_cases
-user.start_scraper
+# scrape.print_active_cases
+scrape.start_scraper

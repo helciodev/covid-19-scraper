@@ -7,7 +7,6 @@ require 'tty-prompt'
 require 'tty-box'
 require 'tty-spinner'
 require 'tty-link'
-require 'byebug'
 
 
 class Scraper
@@ -90,7 +89,10 @@ class Scraper
       print_country(filter_country(countries_stats, user_input))
     end
     font = TTY::Font.new(:doom)
+    git_repo = TTY::Link.link_to('if you liked it give a ⭐ t', 'https://github.com/helciodev/covid-19-scraper'.blue)
+    
     puts font.write("thanks for using").light_blue
+    puts git_repo
   end
 
 end
