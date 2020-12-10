@@ -9,15 +9,18 @@ require 'tty-spinner'
 require 'tty-link'
 require 'byebug'
 
+require_relative '../lib/scraper_logic'
+
 class User_interface
+  attr_accessor :scraper_logic
 
   def initialize
+    self.scraper_logic = Scraper.new
     @url = 'https://www.worldometers.info/coronavirus/'
     @doc = Nokogiri::HTML(URI.open(@url))
     @spinner = TTY::Spinner.new
     @countries_and_territories = @doc.css('tr').reject { |tr| tr['data-continent'] }[2..221]
     @countries_stats = []
-
     @general_info = @doc.css('#maincounter-wrap').map do |e|
     e.text
      .gsub(/\n/, '')
@@ -120,70 +123,19 @@ def print_active_cases
       }
     )
     puts ""
-    end
-
-#  print country function
- def print_country(country)
-    $spinner.auto_spin
-    puts Terminal::Table.new(
-      rows: [
-        [country[:name], 
-        country[:total_cases], 
-        country[:new_cases],
-        country[:total_deaths],
-        country[:new_deaths],
-        country[:total_recovered],
-        country[:new_recovered],
-        country[:active_cases],
-        country[:serious_critical],
-        country[:total_cases_per_1_milion]]
-      ],
-      headings: [
-        'Country'.bold.blue,
-        'Total'.red,
-        'New cases'.bold.blue,
-        'Total deaths'.bold.red,
-        'New deaths'.red,
-        'Total reco'.bold.green,
-        'New reco'.bold.green,
-        'Active cases'.red,
-        'Serious/critical'  .red,
-        'Total cases/1M'.bold.blue,
-        
-      ],
-      style: {
-        border_i: '+'
-      }
-     )
-  
-     puts Terminal::Table.new(
-       rows: [
-        [country[:deaths_per_1_milion],
-        country[:total_tests],
-        country[:tests_per_1_milion],
-        country[:population],
-        country[:continent] ]
-       ],
-       headings: [
-        'Total deaths/1M'.red,
-        'Total tests'.bold.blue,
-        'Total tests/1M'.bold.blue,
-        'Population'.bold.green,
-        'continent'.bold.green
-       ],
-       style: {
-        border_i: '+'
-      }
-     )
-     $spinner.success
-      puts ""
-    end
+  end
 
     # print general table method
-   
+   def start_scraper
+    @spinner.auto_spin
+    print TTY::Link.link_to("fetching data from", "https://www.worldometers.info/coronavirus/")
+    @spinner.success
+    scraper_logic.ask_user(@countries_stats)
+   end
+
 end
 
-user = User_interface.new
+scrape = User_interface.new
 
-user.print_active_cases
-user.print_closed_cases
+scrape.print_active_cases
+user.start_scraper
