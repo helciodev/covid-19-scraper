@@ -57,4 +57,4 @@ Contributions, issues, and feature requests are welcome! Start by:
 
 Give a ⭐️ if you like this project!
 
-![NPM License](https://img.shields.io/npm/l/:packageName)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
