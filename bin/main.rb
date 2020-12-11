@@ -135,8 +135,8 @@ class UserInterface
 
   # print general table method
   def start_scraper
-    puts ""
-    puts TTY::Link.link_to( 'data from', 'https://www.worldometers.info/coronavirus/'.blue)
+    puts ''
+    puts TTY::Link.link_to('data from', 'https://www.worldometers.info/coronavirus/'.blue)
     welcome_message
     print_general_table
     print_active_cases
