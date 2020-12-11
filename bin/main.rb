@@ -7,6 +7,7 @@ require 'tty-prompt'
 require 'tty-box'
 require 'tty-link'
 require 'byebug'
+require 'tty-spinner'
 require_relative '../lib/scraper_logic'
 
 class VariableGenerator
@@ -20,7 +21,7 @@ class VariableGenerator
     }
   end
 
-  def closed_cases_generator(doc) 
+  def closed_cases_generator(doc)
     {
       cases_wich_had_an_outcome: doc.css('.number-table-main')[1].text,
       recovered_discharged: doc.css('span.number-table')[2].text,
@@ -57,9 +58,13 @@ class UserInterface
   attr_accessor :scraper_logic, :cases
 
   def initialize
+    @spinner = TTY::Spinner.new
     self.scraper_logic = Scraper.new
     self.cases = VariableGenerator.new
+    @spinner.auto_spin
+    print TTY::Link.link_to('fetching data from: ', 'https://www.worldometers.info/coronavirus/'.blue)
     @doc = Nokogiri::HTML(URI.open('https://www.worldometers.info/coronavirus/'))
+    @spinner.success
     @countries_and_territories = @doc.css('tr').reject { |tr| tr['data-continent'] }[2..221]
     @countries_stats = []
     @general_info = @doc.css('#maincounter-wrap').map do |e|
@@ -147,7 +152,6 @@ class UserInterface
   # print general table method
   def start_scraper
     puts ''
-    puts TTY::Link.link_to('data from', 'https://www.worldometers.info/coronavirus/'.blue)
     welcome_message
     print_general_table
     print_active_cases
