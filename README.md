@@ -6,7 +6,7 @@ This app scrapes for data at [world ometers info](https://www.worldometers.info/
 
 ## To install and run
 
-- Clone the project repo from [GitHub](https://github.com/helciodev/covid-19-scraper) using `git clone https://github.com/bashforger/scraper`
+- Clone the project repo from [GitHub](https://github.com/helciodev/covid-19-scraper) using `git https://github.com/helciodev/covid-19-scraper`
 - Make sure [Ruby-lang](https://www.ruby-lang.org/en/) is installed
 - Make sure [Bundler](https://bundler.io/) is installed
 - Install the required gems. Run `bundle install`
