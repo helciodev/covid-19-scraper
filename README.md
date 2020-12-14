@@ -21,7 +21,7 @@
 
 ![screenshot](assets/user-interact.jpg)
 
-<p>To run tests <strong>rspec spec/tests.rb </strong>
+To run tests run `rspec spec/tests.rb`
 
 ## Designed With
 [![forthebadge](https://forthebadge.com/images/badges/made-with-ruby.svg)](https://forthebadge.com)
