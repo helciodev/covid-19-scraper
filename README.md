@@ -11,7 +11,7 @@
 - Make sure [Ruby-lang](https://www.ruby-lang.org/en/) is installed
 - Make sure [Bundler](https://bundler.io/) is installed
 - Install the required gems. Run `bundle install`
-- Run `ruby bin/main.rb`
+- Run `ruby bin/scraper.rb`
 
 ## Usage Instructions
 ![screenshot](assets/general-info.png)
