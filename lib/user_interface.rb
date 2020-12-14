@@ -9,7 +9,7 @@ require 'tty-link'
 require 'byebug'
 require 'tty-spinner'
 require_relative '../lib/scraper_logic'
-require_relative './variables_gen.rb'
+require_relative './variables_gen'
 
 class UserInterface
   attr_accessor :scraper_logic, :cases
