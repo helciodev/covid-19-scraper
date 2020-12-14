@@ -6,7 +6,7 @@ require 'tty-font'
 require 'tty-prompt'
 require 'tty-box'
 require 'tty-link'
-require_relative './print_country'
+require_relative '../bin/print_country'
 
 class Scraper
   def initialize

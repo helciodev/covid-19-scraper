@@ -8,7 +8,7 @@ require 'tty-box'
 require 'tty-link'
 require 'byebug'
 require 'tty-spinner'
-require_relative '../lib/user_interface'
+require_relative '../bin/user_interface'
 
 scraper = UserInterface.new
 scraper.start_scraper
