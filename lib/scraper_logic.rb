@@ -15,7 +15,7 @@ class Scraper
 
   def print_all(countries_stats)
     countries_stats.each do |country|
-      @print_c.print_country(country)
+    @print_c.print_country(country)
     end
   end
 

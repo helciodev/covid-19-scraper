@@ -9,7 +9,7 @@ require 'tty-link'
 require 'byebug'
 require 'tty-spinner'
 require_relative '../lib/scraper_logic'
-require_relative './variables_gen'
+require_relative '../lib/variables_gen'
 require_relative './print_country'
 
 class UserInterface

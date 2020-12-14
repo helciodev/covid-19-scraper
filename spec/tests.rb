@@ -1,4 +1,4 @@
-require_relative '../lib/user_interface'
+require_relative '../bin/user_interface'
 require_relative '../lib/scraper_logic'
 
 require 'rspec'
