@@ -2,7 +2,8 @@
 
  
 # covid-19-scraper
-This app scrapes for data at [world ometers info](https://www.worldometers.info/coronavirus), presents general information in tables and allows the user to search statistics about covid-19 by country or territory.
+<p>This app scrapes for data at [world ometers info](https://www.worldometers.info/coronavirus), presents general information in tables and allows the user to search statistics about covid-19 by country or territory.</p>
+<p>I chose this theme as my Ruby capstone project because is a very interesting and common matter of conversation between me and my peers and it is changing the way we live our lives all around the world.</p>
 
 ## To install and run
 
@@ -19,6 +20,8 @@ This app scrapes for data at [world ometers info](https://www.worldometers.info/
 <p>The user can interact with the app by selecting a respective country from the 220 countries and territories affected by covid-19 using keyboard arrows as shown in the image below </p>
 
 ![screenshot](assets/user-interact.jpg)
+
+<p>To run tests <strong>rspec spec/tests.rb </strong>
 
 ## Designed With
 [![forthebadge](https://forthebadge.com/images/badges/made-with-ruby.svg)](https://forthebadge.com)
