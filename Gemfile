@@ -1,0 +1,11 @@
+source 'https://rubygems.org'
+
+gem 'colorize', '~> 0.8.1'
+gem 'nokogiri'
+gem 'rspec', '~> 3.10'
+gem 'terminal-table', '~> 2.0'
+gem 'tty-box'
+gem 'tty-font'
+gem 'tty-link'
+gem 'tty-prompt'
+gem 'tty-spinner'
