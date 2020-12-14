@@ -86,23 +86,5 @@ class Scraper
     country[0]
   end
 
-  def ask_user(countries_stats)
-    prompt = TTY::Prompt.new
-    puts ''
-    user_input = prompt.select("Choose 'All' to print 220 indivdual
-    contries stats about covid-19 or choose a specific
-    country to know stats about covid-19?", 'All', countries_stats.each { |country_name| country_name[:name] })
-
-    case user_input
-    when 'All'
-      print_all(countries_stats)
-    else
-      print_country(filter_country(countries_stats, user_input))
-    end
-    font = TTY::Font.new(:doom)
-    git_repo = TTY::Link.link_to('if you liked it give a ⭐ t', 'https://github.com/helciodev/covid-19-scraper'.blue)
-
-    puts font.write('thanks for using').light_blue
-    puts git_repo
-  end
+ 
 end
