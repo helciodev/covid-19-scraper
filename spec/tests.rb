@@ -1,5 +1,6 @@
+require_relative '../lib/user_interface'
 require_relative '../lib/scraper_logic'
-require_relative '../bin/main'
+
 require 'rspec'
 require 'nokogiri'
 require 'colorize'
@@ -10,11 +11,11 @@ require 'tty-prompt'
 require 'tty-box'
 require 'tty-link'
 
-describe User_interface do
+describe UserInterface do
   let(:user_interface) { UserInterface.new }
   let(:user_interface_one) { UserInterface.new }
 
-  describe '<< User_interface class >>'.magenta do
+  describe '<< UserInterface class >>'.magenta do
     it 'checks if user_interface.print_general_table equals user_interface_one.print_general_table' do
       expect(user_interface.print_general_table).to equal(user_interface_one.print_general_table)
     end
@@ -75,17 +76,11 @@ describe Scraper do
   name = 'USA'
 
   describe '<< Scraper class >>'.magenta do
-    it 'checks if scraper.print_country equals scraper_one.print_country' do
-      expect(scraper.print_country(countries[0])).to equal(scraper_one.print_country(countries[0]))
-    end
     it 'checks if scraper.print_all equals scraper_one.print_all' do
       expect(scraper.print_all(countries)).to equal(scraper_one.print_all(countries))
     end
     it 'checks if scraper.filter_country equals scraper_one.filter_country' do
       expect(scraper.filter_country(countries, name)).to equal(scraper_one.filter_country(countries, name))
-    end
-    it 'checks if scraper.ask_user equals scraper_one.ask_user' do
-      expect(scraper.ask_user(countries)).to equal(scraper_one.ask_user(countries))
     end
   end
 end

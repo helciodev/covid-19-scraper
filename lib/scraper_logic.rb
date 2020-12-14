@@ -6,11 +6,16 @@ require 'tty-font'
 require 'tty-prompt'
 require 'tty-box'
 require 'tty-link'
+require_relative './print_country'
 
 class Scraper
+  def initialize
+    @print_c = PrintCountry.new
+  end
+
   def print_all(countries_stats)
     countries_stats.each do |country|
-      print_country(country)
+      @print_c.print_country(country)
     end
   end
 
